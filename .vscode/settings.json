@@ -1,4 +1,3 @@
 {
-    "go.gopath": "/Users/liuyanchao/go:/Users/liuyanchao/Documents/11-goworking",
-    "go.goroot": "/usr/local/go",
+    "go.inferGopath": false,
 }

@@ -4,14 +4,14 @@ import (
 	"fmt"
 	"log"
 
-	"demo.io/demo-base/test"
+	"demo.io/demo-protoc/test"
 	"github.com/golang/protobuf/proto"
 )
 
 func main() {
 	student := &test.Student{
-		Name: "test",
-		Male: true,
+		Name:   "test",
+		Male:   true,
 		Scores: []int32{98, 85, 88},
 	}
 	data, err := proto.Marshal(student)

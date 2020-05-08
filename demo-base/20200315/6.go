@@ -17,7 +17,7 @@ type BenZ struct {
 }
 
 func (benz *BenZ) Run() {
-	fmt.Println("Benz is runnint...")
+	fmt.Println("Benz is running...")
 }
 
 type BMW struct {
@@ -37,7 +37,7 @@ func (zhang3 *Zhang_3) Drive(car Car) {
 	car.Run()
 }
 
-func Li_4 struct {
+type Li_4 struct {
 
 }
 

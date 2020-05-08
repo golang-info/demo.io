@@ -13,7 +13,7 @@ type Person struct {
 }
 
 func (p *Person) Show() {
-	fmt.Println("装扮的"， p.Name)
+	fmt.Println("装扮的", p.Name)
 }
 
 //对Person进行装饰， show的前后增加额外操作
@@ -23,7 +23,7 @@ type Finery struct {
 
 func (self *Finery) Decorate(component Shower) {
 	self.Shower = component
-} 
+}
 
 func (self *Finery) Show() {
 	if self.Shower == nil {
@@ -64,6 +64,6 @@ func (self *Sneakers) Show() {
 	if self.Shower == nil {
 		return
 	}
-	if self.Shower.Show()
+	self.Shower.Show()
 	fmt.Println("穿上破球鞋")
 }

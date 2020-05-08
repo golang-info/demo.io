@@ -1,0 +1,6 @@
+# github.com/cpuguy83/go-md2man v1.0.10
+github.com/cpuguy83/go-md2man/md2man
+# github.com/russross/blackfriday v1.5.2
+github.com/russross/blackfriday
+# github.com/urfave/cli v1.22.0
+github.com/urfave/cli

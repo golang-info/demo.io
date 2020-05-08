@@ -31,15 +31,16 @@ func (ph *PayBanker) DoBusi() {
 	fmt.Println("进行了支付")
 }
 
+//实现架构层（基于抽象层进行业务封装-针对interface接口进行封装）
+func BankerBusiness(banker AbstractBanker) {
+	//通过接口来向下调用，(多态现象)
+	banker.DoBusi()
+}
+
 func main() {
-	sb := &SaveBanker{}
-	sb.DoBusi()
-
-	tb := &TransferBanker{}
-	tb.DoBusi()
-
-	pb := &PayBanker{}
-	pb.DoBusi()
+	BankerBusiness(&SaveBanker{})
+	BankerBusiness(&TransferBanker{})
+	BankerBusiness(&PayBanker{})
 }
 
 
