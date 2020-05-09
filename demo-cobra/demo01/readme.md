@@ -3,7 +3,9 @@
 `cobra init --pkg-name=demo.io/demo-cobra/demo01`
 
 `cobra add image`
+
 `cobra add container`
+
 `cobra add version`
 
 - 完整命令单
