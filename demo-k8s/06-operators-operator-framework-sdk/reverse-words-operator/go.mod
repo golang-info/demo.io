@@ -1,4 +1,4 @@
-module github.com/golang-info/everse-words-operator
+module github.com/golang-info/reverse-words-operator
 
 go 1.14
 
