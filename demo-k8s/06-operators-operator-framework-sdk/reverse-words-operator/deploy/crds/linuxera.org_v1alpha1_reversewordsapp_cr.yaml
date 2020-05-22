@@ -1,0 +1,7 @@
+apiVersion: linuxera.org/v1alpha1
+kind: ReverseWordsApp
+metadata:
+  name: example-reversewordsapp
+spec:
+  # Add fields here
+  size: 3

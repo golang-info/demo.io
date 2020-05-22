@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reverse-words-operator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: reverse-words-operator
+  template:
+    metadata:
+      labels:
+        name: reverse-words-operator
+    spec:
+      serviceAccountName: reverse-words-operator
+      containers:
+        - name: reverse-words-operator
+          # Replace this with the built image name
+          image: REPLACE_IMAGE
+          command:
+          - reverse-words-operator
+          imagePullPolicy: Always
+          env:
+            - name: WATCH_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: OPERATOR_NAME
+              value: "reverse-words-operator"
