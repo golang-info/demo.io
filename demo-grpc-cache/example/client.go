@@ -34,7 +34,14 @@ func main() {
 	}
 	defer conn.Close()
 
-	c := api.CacheServiceClient(conn)
+	// call api method err:
+	// # command-line-arguments
+	// ./example.go:37:29: cannot convert conn (type *grpc.ClientConn) to type cacheService.CacheServiceClient:
+	// *grpc.ClientConn does not implement cacheService.CacheServiceClient (missing Add method)
+	// ./example.go:87:59: invalid indirect of emptypb.Empty literal (type emptypb.Empty)
+
+	//c := api.CacheServiceClient(conn)
+	c := api.NewCacheServiceClient(conn)
 
 	// Add key
 	keyVal1 := &api.Item{
@@ -84,7 +91,7 @@ func main() {
 	fmt.Println("Response from server for getting a key", getKeyRes)
 
 	// GetAllItems
-	getAllKeyRes, err := c.GetAllItems(context.Background(), *empty.Empty{})
+	getAllKeyRes, err := c.GetAllItems(context.Background(), &empty.Empty{})
 	if err != nil {
 		log.Fatal("Error when calling GetAllItems: %s", err)
 	}
