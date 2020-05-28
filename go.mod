@@ -3,6 +3,7 @@ module demo.io
 require (
 	github.com/fsnotify/fsnotify v1.4.9 // indirect
 	github.com/golang/protobuf v1.3.4
+	github.com/julienschmidt/httprouter v1.3.0 // indirect
 	github.com/kr/pretty v0.2.0 // indirect
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/mitchellh/mapstructure v1.3.0 // indirect
