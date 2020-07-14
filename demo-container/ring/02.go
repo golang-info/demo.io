@@ -31,7 +31,7 @@ func main() {
 	r.Do(func(p interface{}) {
 		fmt.Println(p.(int))
 	})
-	
+
 	s := r.Next().Next().Next()
 	s.Do(func(p interface{}) {
 		fmt.Println(p.(int))
