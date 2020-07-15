@@ -29,14 +29,14 @@ func main() {
 	created DATE NULL
 	);`
 
-	stmt, _ := db.Prepare(sql_table)
-	stmt.Exec()
+	//stmt, _ := db.Prepare(sql_table)
+	//stmt.Exec()
 
-	//_, err = db.Exec(sql_table)
-	//checkErr(err)
+	_, err = db.Exec(sql_table)
+	checkErr(err)
 
 	//insert
-	stmt, err = db.Prepare("INSERT INTO userinfo(username, departname, created) values(?,?,?)")
+	stmt, err := db.Prepare("INSERT INTO userinfo(username, departname, created) values(?,?,?)")
 	checkErr(err)
 
 	res, err := stmt.Exec("wangshubo", "国务院", "2017-04-21")
