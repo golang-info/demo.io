@@ -8,7 +8,7 @@ import "fmt"
 
 func main() {
 	// var demo []int
-	demo := []int{1, 2, 3, 4, 5, 6}
+	demo := []int{1, 2, 3, 4, 5}
 	fmt.Println(runningSum(demo))
 }
 
