@@ -2,15 +2,14 @@ package statefulsets
 
 import (
 	"fmt"
-	"github.com/google/martian/log"
 	"github.com/pkg/errors"
 	appsv1 "k8s.io/api/apps/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
 )
 
-func GreateStatefulSets(kubeClient kubernetes.Interface, sfs *appsv1.StatefulSet, namespace string) (*appsv1.StatefulSet, error) {
-	statefulsets, err := GetStatefulSets(kubeClient, namespace)
+func CreateStatefulSets(kubeClient kubernetes.Interface, sfs *appsv1.StatefulSet, namespace string) (*appsv1.StatefulSet, error) {
+	statefulsets, err := GetStatefulSets(kubeClient, namespace, sfs.Name)
 	if statefulsets != nil {
 		// TODO: update statefulsets
 		fmt.Println("Staefulsets already exist")
@@ -20,7 +19,7 @@ func GreateStatefulSets(kubeClient kubernetes.Interface, sfs *appsv1.StatefulSet
 	sfs, err = kubeClient.AppsV1().StatefulSets(namespace).Create(sfs)
 	if err != nil {
 		// TODO: error & logs
-		return nil, errors.Errorf(err, "creating statefulsets '%s'", sfs)
+		return nil, errors.Wrapf(err, "creating statefulsets '%s'", sfs)
 	}
 
 	fmt.Printf("Statefulsets created %s / %s", sfs.Namespace, sfs.Name)
@@ -28,7 +27,7 @@ func GreateStatefulSets(kubeClient kubernetes.Interface, sfs *appsv1.StatefulSet
 }
 
 func DeleteStatefulSets(kubeClient kubernetes.Interface, namespace, id string) error {
-	sfs, err := GetStatefulSets(kubeClient, id)
+	sfs, err := GetStatefulSets(kubeClient, namespace, id)
 	if sfs == nil {
 		errors.Wrapf(err, "Statefulsets not exist")
 	}
