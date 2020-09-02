@@ -34,7 +34,7 @@ func main() {
 	client, err := dynamic.NewForConfig(config)
 	checkErr(err)
 
-	deploymentres := schema.GroupVersionResource{
+	deploymentRes := schema.GroupVersionResource{
 		Group:    "apps",
 		Version:  "v1",
 		Resource: "deployments",
@@ -82,7 +82,7 @@ func main() {
 
 	// Create Deployment
 	fmt.Println("Creating deployment...")
-	result, err := client.Resource(deploymentres).Namespace(namespace).Create(deployment, metav1.CreateOptions{})
+	result, err := client.Resource(deploymentRes).Namespace(namespace).Create(deployment, metav1.CreateOptions{})
 	checkErr(err)
 	fmt.Printf("Created deployment %q.\n", result.GetName())
 
@@ -105,7 +105,7 @@ func main() {
 	retryErr := retry.RetryOnConflict(retry.DefaultRetry, func() error {
 		// Retrieve the latest version of Deployment before attempting update
 		// RetryOnConflict uses exponential backoff to avoid exhausting the apiserver
-		result, getErr := client.Resource(deploymentres).Namespace(namespace).Get("demo-deployment", metav1.GetOptions{})
+		result, getErr := client.Resource(deploymentRes).Namespace(namespace).Get("demo-deployment", metav1.GetOptions{})
 		if getErr != nil {
 			panic(fmt.Errorf("failed to get latest version of Deployment: %v", getErr))
 		}
@@ -129,7 +129,7 @@ func main() {
 			panic(err)
 		}
 
-		_, updateErr := client.Resource(deploymentres).Namespace(namespace).Update(result, metav1.UpdateOptions{})
+		_, updateErr := client.Resource(deploymentRes).Namespace(namespace).Update(result, metav1.UpdateOptions{})
 		return updateErr
 	})
 	fmt.Println("Updated deployment...")
@@ -137,7 +137,7 @@ func main() {
 	// List Deployments
 	prompt()
 	fmt.Printf("Listing deployments in namespace %q:\n", apiv1.NamespaceDefault)
-	list, err := client.Resource(deploymentres).Namespace(namespace).List(metav1.ListOptions{})
+	list, err := client.Resource(deploymentRes).Namespace(namespace).List(metav1.ListOptions{})
 	if err != nil {
 		panic(err)
 	}
@@ -160,7 +160,7 @@ func main() {
 	deleteOptions := metav1.DeleteOptions{
 		PropagationPolicy: &deletePolicy,
 	}
-	if err := client.Resource(deploymentres).Namespace(namespace).Delete("demo-deployment", &deleteOptions); err != nil {
+	if err := client.Resource(deploymentRes).Namespace(namespace).Delete("demo-deployment", &deleteOptions); err != nil {
 		panic(err)
 	}
 
