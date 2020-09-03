@@ -9,6 +9,7 @@ import (
 	"context"
 	"encoding/json"
 	"flag"
+	"fmt"
 	"k8s.io/client-go/tools/clientcmd"
 	"k8s.io/client-go/util/homedir"
 	"path/filepath"
@@ -55,6 +56,8 @@ func configInit() (config *rest.Config, err error) {
 		kubeconfig = flag.String("kubeconfig", "", "absolute path to the kubeconfig file")
 	}
 	flag.Parse()
+
+	fmt.Println("*kubeconfig: ", *kubeconfig)
 
 	config, err = clientcmd.BuildConfigFromFlags("", *kubeconfig)
 	return
