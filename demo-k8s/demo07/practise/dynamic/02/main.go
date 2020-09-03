@@ -8,6 +8,10 @@ package main
 import (
 	"context"
 	"encoding/json"
+	"flag"
+	"k8s.io/client-go/tools/clientcmd"
+	"k8s.io/client-go/util/homedir"
+	"path/filepath"
 
 	"k8s.io/apimachinery/pkg/api/meta"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -42,6 +46,19 @@ spec:
 `
 
 var decUnstructured = yaml.NewDecodingSerializer(unstructured.UnstructuredJSONScheme)
+
+func configInit() (config *rest.Config, err error) {
+	var kubeconfig *string
+	if home := homedir.HomeDir(); home != "" {
+		kubeconfig = flag.String("kubeconfig", filepath.Join(home, ".kube", "config"), "(optional) ablolute path to the kubeconfig file")
+	} else {
+		kubeconfig = flag.String("kubeconfig", "", "absolute path to the kubeconfig file")
+	}
+	flag.Parse()
+
+	config, err = clientcmd.BuildConfigFromFlags("", *kubeconfig)
+	return
+}
 
 func doSSA(ctx context.Context, cfg *rest.Config) error {
 	// 1. Prepare a RESTMapper to find GVR
@@ -89,9 +106,29 @@ func doSSA(ctx context.Context, cfg *rest.Config) error {
 	// 7. Greate or Update the object with SSA
 	//    types.ApplyPatchType indicates SSA
 	//    FieldManager specifies the field owner ID.
-	_, err = dr.Patch(ctx, obj.GetName(), types.ApplyPatchType, data, metav1.PatchOptions{
+	_, err = dr.Patch(obj.GetName(), types.ApplyPatchType, data, metav1.PatchOptions{
 		FieldManager: "sample-controller",
 	})
 
+	/*	err = dr.Delete(obj.GetName(), &metav1.DeleteOptions{})
+		if err != nil {
+			panic(err)
+		} else {
+			fmt.Printf("%s has been deleted.", obj.GetName())
+		}
+	*/
+
 	return err
+}
+
+func main() {
+	config, err := configInit()
+	if err != nil {
+		panic(err)
+	}
+
+	err = doSSA(context.Background(), config)
+	if err != nil {
+		panic(err)
+	}
 }
