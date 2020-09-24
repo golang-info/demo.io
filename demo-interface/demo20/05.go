@@ -36,7 +36,8 @@ type Sizer interface {
 
 type Shaper interface {
 	Sizer
-	fmt.Stringer
+	// fmt.Stringer
+	String() string
 }
 
 func main() {
