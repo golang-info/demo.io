@@ -14,7 +14,7 @@ type A struct {
 	age  int
 }
 
-func (a A) IsEmpty() bool {
+func (a *A) IsEmpty() bool {
 	return reflect.DeepEqual(a, A{})
 }
 
