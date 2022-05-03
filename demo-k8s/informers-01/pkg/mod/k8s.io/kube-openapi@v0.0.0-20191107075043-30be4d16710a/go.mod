@@ -30,7 +30,7 @@ require (
 	golang.org/x/sys v0.0.0-20170830134202-bb24a47a89ea // indirect
 	golang.org/x/text v0.0.0-20160726164857-2910a502d2bf // indirect
 	golang.org/x/tools v0.0.0-20181011042414-1f849cf54d09 // indirect
-	gopkg.in/yaml.v2 v2.2.1
+	gopkg.in/yaml.v2 v2.2.8
 	k8s.io/gengo v0.0.0-20190128074634-0689ccc1d7d6
 	k8s.io/klog v0.0.0-20181102134211-b9b56d5dfc92
 	sigs.k8s.io/structured-merge-diff v0.0.0-20190525122527-15d366b2352e
