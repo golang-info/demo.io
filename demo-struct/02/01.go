@@ -1,10 +1,4 @@
 package main
-
-import (
-	"fmt"
-	"reflect"
-)
-
 /*
 	https://studygolang.com/articles/16507
 */
