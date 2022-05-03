@@ -19,7 +19,7 @@ func main() {
 }
 
 func CustomerImapClient() (*client.Client, error) {
-	return NewImapClient("ycliu912@163.com", "XWOLXSWHQYVQTXNE")
+	return NewImapClient("ycliu912@163.com", "XWOLXSWHQYVQTXEN")
 }
 
 func NewImapClient(username, password string) (*client.Client, error) {
